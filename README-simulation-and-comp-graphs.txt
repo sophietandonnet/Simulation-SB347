@@ -5,52 +5,47 @@ Simulations performed taking into consideration all ages
 ========================================================
 
 # Simulation using observed data
-05-17 22:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-all.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-all.txt
 
 # hermaphrodite and female F1 proportions reversed
-05-18 14:56 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-reversed.csv -i proportion-herm-reversed.csv > FINAL_SIMULATIONS/SIMULATION_REVERSED-PROP-all.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-reversed.csv -i proportion-herm-reversed.csv > FINAL_SIMULATIONS/SIMULATION_REVERSED-PROP-all.txt
 
 # RHABDIAS-LIKE
-05-18 15:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-only-herm-produced.csv -i Proportion-10p-male-and-90p-female.csv > FINAL_SIMULATIONS/SIMULATION_RHABDIAS-LIKE-all.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-only-herm-produced.csv -i Proportion-10p-male-and-90p-female.csv > FINAL_SIMULATIONS/SIMULATION_RHABDIAS-LIKE-all.txt
 
 # Hermaphrodite producing 100% hermaphrodite
-05-18 14:58 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-only-herm-produced.csv > FINAL_SIMULATIONS/SIMULATION_HERM-all.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-only-herm-produced.csv > FINAL_SIMULATIONS/SIMULATION_HERM-all.txt
 
 # Hermaphrodite producing like female (hermaphrodite producing mostly hermaphrodite)
-05-18 15:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-fem-8h.csv > FINAL_SIMULATIONS/SIMULATION_HERM_prod_like_fem-all.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-fem-8h.csv > FINAL_SIMULATIONS/SIMULATION_HERM_prod_like_fem-all.txt
 
 # Hermaphrodites developping as fast as females (no delay) -> WARNING: Simulator slightly changed to do this simulation (notes in the simulator)
-05-19 21:59 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-same_larval_time_all.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-same_larval_time_all.txt
 
 
 Simulations performed taking into account only the dauers -> WARNING, the simulator script was slightly changed to output only the dauers
 =========================================================================================================================================
 
 # Simulation using observed data
-05-17 22:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-DAUER.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-DAUER.txt
 
 # hermaphrodite and female F1 proportions reversed
-05-18 14:56 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-reversed.csv -i proportion-herm-reversed.csv > FINAL_SIMULATIONS/SIMULATION_REVERSED-PROP-DAUER.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-reversed.csv -i proportion-herm-reversed.csv > FINAL_SIMULATIONS/SIMULATION_REVERSED-PROP-DAUER.txt
 
 # RHABDIAS-LIKE
-05-18 15:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-only-herm-produced.csv -i Proportion-10p-male-and-90p-female.csv > FINAL_SIMULATIONS/SIMULATION_RHABDIAS-LIKE-DAUER.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-only-herm-produced.csv -i Proportion-10p-male-and-90p-female.csv > FINAL_SIMULATIONS/SIMULATION_RHABDIAS-LIKE-DAUER.txt
 
 # Hermaphrodite producing 100% hermaphrodite
-05-18 14:58 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-only-herm-produced.csv > FINAL_SIMULATIONS/SIMULATION_HERM-DAUER.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-only-herm-produced.csv > FINAL_SIMULATIONS/SIMULATION_HERM-DAUER.txt
 
 # Hermaphrodite producing like female (hermaphrodite producing mostly hermaphrodite)
-05-18 15:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-fem-8h.csv > FINAL_SIMULATIONS/SIMULATION_HERM_prod_like_fem-DAUER.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-fem-8h.csv > FINAL_SIMULATIONS/SIMULATION_HERM_prod_like_fem-DAUER.txt
 
 # Hermaphrodites developping as fast as females (no delay) -> WARNING: Simulator slightly changed to do this simulation (notes in the simulator)
-05-19 22:00 ~/D/S/M/S/new-runs-with-true-data$ python3.4 /Users/u1458103/Desktop/gitrepos/simulation-SB347/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-same_larval_time_DAUER.txt
+$ python3.4 /Path/to/script/simulation-SB347.py -f rate-fem-8h.csv -h rate-herm-8h.csv -g proportion-fem-8h.csv -i proportion-herm-8h.csv > FINAL_SIMULATIONS/SIMULATION_OBSERVED-DATA-same_larval_time_DAUER.txt
 
 
 
-
-05-19 14:59 ~/D/S/M/S/n/FINAL_SIMULATIONS$ paste time_points.txt SIMULATION_OBSERVED-DATA-DAUER.txt SIMULATION_REVERSED-PROP-DAUER.txt > obs-vs-reversed-DAUER.txt
-05-19 15:01 ~/D/S/M/S/n/FINAL_SIMULATIONS$ paste time_points.txt SIMULATION_OBSERVED-DATA-DAUER.txt SIMULATION_HERM-DAUER.txt SIMULATION_RHABDIAS-LIKE-DAUER.txt > obs-vs-rhabdias-vs-herm-DAUER.txt
-
-05-19 22:29 ~/D/S/M/S/n/FINAL_SIMULATIONS$ paste time_points.txt SIMULATION_OBSERVED-DATA-DAUER.txt SIMULATION_RHABDIAS-LIKE-DAUER.txt SIMULATION_HERM-DAUER.txt SIMULATION_REVERSED-PROP-DAUER.txt SIMULATION_OBSERVED-DATA-same_larval_time_DAUER.txt> all_simulations-DAUER.txt
 
 
 Competition graphs in R
@@ -118,7 +113,10 @@ dev.off()
 # Dauers only
 # ***********
 
+In the terminal:
+$ paste time_points.txt SIMULATION_OBSERVED-DATA-DAUER.txt SIMULATION_RHABDIAS-LIKE-DAUER.txt SIMULATION_HERM-DAUER.txt SIMULATION_REVERSED-PROP-DAUER.txt SIMULATION_OBSERVED-DATA-same_larval_time_DAUER.txt> all_simulations-DAUER.txt
 
+In R:
 tabela <- read.table("/Users/u1458103/Desktop/SB347/MODELLING/Simulation-SB347/new-runs-with-true-data/FINAL_SIMULATIONS/all_simulations-DAUER.txt",sep='\t')
 tabela <- rename(tabela, c("V1"="time_points", "V2"="Observed", "V3"="Rhabdias.like", "V4"="Hermaphroditic", "V5"="Reversed.proportions", "V6"="No.developmental.delay.of.hermaphrodites"))
 
