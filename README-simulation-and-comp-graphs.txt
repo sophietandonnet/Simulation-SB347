@@ -90,6 +90,7 @@ for (i in 1:nrow(tabela)) {
 
 head(tabela2)
 
+# Set the number of lines you would like to take into account for the graph
 tabela3 <- tabela2[c(0:80),]
 
 pdf("competition-graph-all-simulations.pdf")
@@ -134,10 +135,12 @@ for (i in 1:nrow(tabela)) {
 }
 
 head(tabela2)
-tabela4 <- tabela2[c(0:80),]
+
+# Set the number of lines you would like to take into account for the graph
+tabela3 <- tabela2[c(0:80),]
 
 pdf("competition-graph-all-simulations-DAUER.pdf")
-ggplot(tabela4, aes(x=time_points, y=Counts))+
+ggplot(tabela3, aes(x=time_points, y=Counts))+
     geom_point(aes(shape=population,colour=population))+
     geom_line(aes(group = population, colour=population))+
 #    scale_color_manual(values=c("black", "#888888" , "#666666")) +
