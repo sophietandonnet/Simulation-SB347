@@ -116,11 +116,11 @@ day_time_points = 3 #population monitored every 8h, therefore 3 times in a day
 # Hermaphrodite settings
 # ----------------------
 
-H_larval_time = 3 * day_time_points # Time period where the hermaphrodite is a larvae (3days)
+H_larval_time = 3 * day_time_points# Time period where the hermaphrodite is a larvae (3days)  ### 2 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
 H_adult_time = 5*day_time_points+1 # Time period where the hermaphrodite is reproducing (5days and 8h)
 lifespanH = H_larval_time + H_adult_time # Total lifespan of a hermaphrodite (from egg to end of reproduction)
 
-time_before_dauer = 2 * day_time_points # Time of egg + L1 + L2 (2 days)
+time_before_dauer = 2 * day_time_points # Time of egg + L1 + L2 (2 days) ## 1 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
 time_of_L4 = 1
 time_after_dauer = time_of_L4 + H_adult_time
 
@@ -176,6 +176,7 @@ L_mal = len(N_mal)
 # header of output
 # ----------------
 
+# Comment if you are only interested in the dauers
 print('#M','#F','#H','%M','%F','%H', sep="\t")
 
 #####################################################################
@@ -248,14 +249,19 @@ while current_iteration < N_iterations:
     result = [Total_mal,Total_fem,Total_her]
     total = sum(result)  
     
-# Total number of individuals of each gender
+# Total number of L1 individuals of each gender
 
     L1_fem = sum(N_fem[1:2])
     L1_her = sum(N_her[1:2])
     L1_mal =sum(N_mal[1:2])
     
     result_L1 = [L1_mal,L1_fem,L1_her]
-    total_L1 = sum(result_L1)    
+    total_L1 = sum(result_L1)   
+    
+# Total number of dauers
+
+    dauers = sum(N_her[6:8])
+    
     
 # Choosing population for output (Adults or mixed individuals)
 
@@ -269,8 +275,12 @@ while current_iteration < N_iterations:
         
 # print result to Standard output
 
+# comment if only the dauers are wanted
     print(population_output[0] , population_output[1] , population_output[2] , proportion[0] , proportion[1] , proportion[2] , sep="\t")
-    
+
+# Uncomment if you're only looking at the dauers
+#    print(dauers)
+
     current_iteration += 1
     
 
