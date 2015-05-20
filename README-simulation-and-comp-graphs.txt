@@ -69,13 +69,13 @@ head(tabela)
 #4          24       50            50             53                   52
 #5          32       91            91             95                   92
 #6          40      129           130            135                  131
-#  No.developmental.delay.of.hermaphrodites
-#1                                        1
-#2                                        1
-#3                                       19
-#4                                       50
-#5                                       91
-#6                                      129
+#  equal developmental time
+#1                          1
+#2                          1
+#3                         19
+#4                         50
+#5                         91
+#6                        129
 
 tabela2 <- data.frame(time_points= factor(),population = factor(), Counts = integer())
 
@@ -85,7 +85,7 @@ for (i in 1:nrow(tabela)) {
 	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='Rhabdias.like',Counts=tabela[i,3]))
     tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='Hermaphroditic',Counts=tabela[i,4]))
 	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='Reversed.proportions',Counts=tabela[i,5]))
-	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='No.developmental.delay.of.hermaphrodites',Counts=tabela[i,6]))
+	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='equal.developmental.time',Counts=tabela[i,6]))
 }
 
 head(tabela2)
@@ -118,7 +118,7 @@ $ paste time_points.txt SIMULATION_OBSERVED-DATA-DAUER.txt SIMULATION_RHABDIAS-L
 
 In R:
 tabela <- read.table("/Path/all_simulations-DAUER.txt",sep='\t')
-tabela <- rename(tabela, c("V1"="time_points", "V2"="Observed", "V3"="Rhabdias.like", "V4"="Hermaphroditic", "V5"="Reversed.proportions", "V6"="No.developmental.delay.of.hermaphrodites"))
+tabela <- rename(tabela, c("V1"="time_points", "V2"="Observed", "V3"="Rhabdias.like", "V4"="Hermaphroditic", "V5"="Reversed.proportions", "V6"="equal.developmental.time"))
 
 head(tabela)
 
@@ -130,7 +130,7 @@ for (i in 1:nrow(tabela)) {
 	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='Rhabdias.like',Counts=tabela[i,3]))
     tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='Hermaphroditic',Counts=tabela[i,4]))
 	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='Reversed.proportions',Counts=tabela[i,5]))
-	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='No.developmental.delay.of.hermaphrodites',Counts=tabela[i,6]))
+	tabela2 <- rbind(tabela2,data.frame(time_points=batch,population='equal.developmental.time',Counts=tabela[i,6]))
 }
 
 head(tabela2)
