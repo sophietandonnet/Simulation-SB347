@@ -59,7 +59,7 @@ library(plyr)
 # Mixed stages
 # ***********
 
-tabela <- read.table("/Users/u1458103/Desktop/SB347/MODELLING/Simulation-SB347/new-runs-with-true-data/FINAL_SIMULATIONS/all_simulations.csv",h=T,sep=',')
+tabela <- read.table("/Path/all_simulations.csv",h=T,sep=',')
 
 head(tabela)
 #time_points Observed Rhabdias.like Hermaphroditic Reversed.proportions
@@ -117,7 +117,7 @@ In the terminal:
 $ paste time_points.txt SIMULATION_OBSERVED-DATA-DAUER.txt SIMULATION_RHABDIAS-LIKE-DAUER.txt SIMULATION_HERM-DAUER.txt SIMULATION_REVERSED-PROP-DAUER.txt SIMULATION_OBSERVED-DATA-same_larval_time_DAUER.txt> all_simulations-DAUER.txt
 
 In R:
-tabela <- read.table("/Users/u1458103/Desktop/SB347/MODELLING/Simulation-SB347/new-runs-with-true-data/FINAL_SIMULATIONS/all_simulations-DAUER.txt",sep='\t')
+tabela <- read.table("/Path/all_simulations-DAUER.txt",sep='\t')
 tabela <- rename(tabela, c("V1"="time_points", "V2"="Observed", "V3"="Rhabdias.like", "V4"="Hermaphroditic", "V5"="Reversed.proportions", "V6"="No.developmental.delay.of.hermaphrodites"))
 
 head(tabela)
