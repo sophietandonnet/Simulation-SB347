@@ -117,7 +117,7 @@ day_time_points = 3 #population monitored every 8h, therefore 3 times in a day
 # ----------------------
 
 H_larval_time = 3 * day_time_points# Time period where the hermaphrodite is a larvae (3days)  ### 2 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
-H_adult_time = 5*day_time_points+1 # Time period where the hermaphrodite is reproducing (5days and 8h)
+H_adult_time = 5*day_time_points+1 + (2*day_time_points) # Time period where the hermaphrodite is reproducing (5days and 8h)
 lifespanH = H_larval_time + H_adult_time # Total lifespan of a hermaphrodite (from egg to end of reproduction)
 
 time_before_dauer = 2 * day_time_points # Time of egg + L1 + L2 (2 days) ## 1 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
