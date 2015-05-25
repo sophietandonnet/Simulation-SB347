@@ -15,17 +15,17 @@
 # last modified: 16/05/2015
 #
 
-
 import sys, getopt
-   
+
+usage_str = 'simulation-SB347.py -f <rate of female offspring production> -h <rate of hermaphrodite offspring production> -g <file of proportion of each gender by females> -i <file of proportion of each gender by hermaphrodite> -p <default, herm_live_longer or equal_develop_time> -o <population output: all or dauers>'
 try:
-  opts, args = getopt.getopt(sys.argv[1:],"af:h:g:i:",["help","Frate=", "Hrate=", "SexProportionF=", "SexProportionH="])
+  opts, args = getopt.getopt(sys.argv[1:],"af:h:g:i:p:o:",["help","Frate=", "Hrate=", "SexProportionF=", "SexProportionH=", "SimulationProfile=", "OutputFormat="])
 except getopt.GetoptError:
-  print('simulation-SB347.py -f <rate of female offspring production> -h <rate of hermaphrodite offspring production> -g <file of proportion of each gender by females> -i <file of proportion of each gender by hermaphrodite>')
+  print(usage_str)
   sys.exit(2)
 
 if len(sys.argv) < 2:
-    print('USAGE: simulation-SB347.py -f <rate of female offspring production> -h <rate of hermaphrodite offspring production> -g <file of proportion of each gender by females> -i <file of proportion of each gender by hermaphrodite>')
+    print(usage_str)
     sys.exit()
 
 
@@ -34,7 +34,7 @@ if len(sys.argv) < 2:
 
 for opt, arg in opts:
   if opt == '-a':
-     print('simulation-SB347.py -f <rate of female offspring production> -h <rate of hermaphrodite offspring production> -g <file of proportion of each gender by females> -i <file of proportion of each gender by hermaphrodite')
+     print(usage_str)
      sys.exit()
   elif opt in ("-f", "--Frate"):
      Frate = arg
@@ -44,8 +44,12 @@ for opt, arg in opts:
      SexProportionF = arg
   elif opt in ("-i", "--SexProportionH"):
      SexProportionH = arg
+  elif opt in ("-p", "--SimulationProfile"):
+     SimulationProfile = arg
+  elif opt in ("-o", "--OutputFormat"):
+     OutputFormat = arg
   else:
-     print('simulation-SB347.py -f <rate of female offspring production> -h <rate of hermaphrodite offspring production> -g <file of proportion of each gender by females> -i <file of proportion of each gender by hermaphrodite>')
+     print(usage_str)
      sys.exit()
 
 ###############################################
@@ -116,15 +120,30 @@ day_time_points = 3 #population monitored every 8h, therefore 3 times in a day
 # Hermaphrodite settings
 # ----------------------
 
-H_larval_time = 3 * day_time_points# Time period where the hermaphrodite is a larvae (3days)  ### 2 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
-H_adult_time = 5*day_time_points+1 + (2*day_time_points) # Time period where the hermaphrodite is reproducing (5days and 8h)
+# There are three possible profiles
+# - default
+# - equal_develop_time
+# - herma_live_longer
+#
+# What distinguishes them is either larval time or the length of the adult time of hermaphrodites
+# 
+
+default =            [3 * day_time_points    , 5*day_time_points+1                      , 2 * day_time_points]
+equal_develop_time = [2 * day_time_points + 1, 5*day_time_points+1                      , 1 * day_time_points + 1]
+herm_live_longer =   [3 * day_time_points    , 5*day_time_points+1 + (2*day_time_points), 2 * day_time_points]
+
+all_profiles = { "default" : default, "equal_develop_time" : equal_develop_time, "herm_live_longer" : herm_live_longer }
+profile = all_profiles[SimulationProfile]
+
+H_larval_time = profile[0]# Time period where the hermaphrodite is a larvae (3days)  ### 2 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
+H_adult_time = profile[1] # Time period where the hermaphrodite is reproducing (5days and 8h) ## for herm living longer: 5*day_time_points+1 + (2*day_time_points)
 lifespanH = H_larval_time + H_adult_time # Total lifespan of a hermaphrodite (from egg to end of reproduction)
 
-time_before_dauer = 2 * day_time_points # Time of egg + L1 + L2 (2 days) ## 1 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
+time_before_dauer = profile[2] # Time of egg + L1 + L2 (2 days) ## 1 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
 time_of_L4 = 1
 time_after_dauer = time_of_L4 + H_adult_time
 
-# Female settings
+# Female settings # same setting as hermaphrodite that doesn't pass through dauer
 # ---------------
 
 F_larval_time = 2 * day_time_points + 1 # Time period where the female is a larvae (2days and 8h)
@@ -146,7 +165,7 @@ lifespanM = M_larval_time + M_adult_time # Total lifespan of a male (from egg to
 
 N_fem = [0]*lifespanF # Number of females at every unit of time (index of the list) of their life. At the begining of the simulation there are no females.
 N_mal = [0]*lifespanM # Number of males at every unit of time. At the begining of the simulation there are no males.
-N_her = [0]*time_before_dauer + [0] + [1] + [0]*time_after_dauer # Number of hermaphrodites at every unit of time. The simulation begins with one dauer larvae (hermaphrodite-fated).The [0] and [1] represent the dauer larvae time (16h).
+N_her = [0]*time_before_dauer + [1] + [0] + [0]*time_after_dauer # Number of hermaphrodites at every unit of time. The simulation begins with one dauer larvae (hermaphrodite-fated).The [0] and [1] represent the dauer larvae time (16h).
 
 # Assert: Testing if the hermaphrodite lifespan in the same in the lists "lifespanH" (initial settings) and "N_her" (initial population)
 
@@ -172,12 +191,6 @@ L_fem = len(N_fem)
 L_her = len(N_her)
 L_mal = len(N_mal)
 
-
-# header of output
-# ----------------
-
-# Comment if you are only interested in the dauers
-print('#M','#F','#H','%M','%F','%H', sep="\t")
 
 #####################################################################
 # Simulating the growth of the population from the initial settings #
@@ -260,7 +273,7 @@ while current_iteration < N_iterations:
     
 # Total number of dauers
 
-    dauers = sum(N_her[6:8])
+    dauers = sum(N_her[time_before_dauer:time_before_dauer + 2])
     
     
 # Choosing population for output (Adults or mixed individuals)
@@ -272,14 +285,12 @@ while current_iteration < N_iterations:
         proportion = [x * 100/total_population_output for x in population_output]
     else:
         proportion = [0,0,0]
-        
+
 # print result to Standard output
-
-# comment if only the dauers are wanted
-    print(population_output[0] , population_output[1] , population_output[2] , proportion[0] , proportion[1] , proportion[2] , sep="\t")
-
-# Uncomment if you're only looking at the dauers
-#    print(dauers)
+    if OutputFormat == "all":
+        print(population_output[0] , population_output[1] , population_output[2] , proportion[0] , proportion[1] , proportion[2] , sep="\t")
+    else:
+        print(dauers)
 
     current_iteration += 1
     
