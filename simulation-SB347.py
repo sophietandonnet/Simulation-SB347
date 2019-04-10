@@ -128,33 +128,33 @@ day_time_points = 3 #population monitored every 8h, therefore 3 times in a day
 # What distinguishes them is either larval time or the length of the adult time of hermaphrodites
 # 
 
-default =            [3 * day_time_points    , 5*day_time_points+1                      , 2 * day_time_points]
-equal_develop_time = [2 * day_time_points + 1, 5*day_time_points+1                      , 1 * day_time_points + 1]
-herm_live_longer =   [3 * day_time_points    , 5*day_time_points+1 + (2*day_time_points), 2 * day_time_points]
+default =            [5 * day_time_points         , 5*day_time_points+1                      , 3 * day_time_points + 1]
+equal_develop_time = [4 * day_time_points         , 5*day_time_points+1                      , 2 * day_time_points + 1]
+herm_live_longer =   [5 * day_time_points         , 5*day_time_points+1 + (2*day_time_points), 3 * day_time_points + 1]
 
 all_profiles = { "default" : default, "equal_develop_time" : equal_develop_time, "herm_live_longer" : herm_live_longer }
 profile = all_profiles[SimulationProfile]
 
-H_larval_time = profile[0]# Time period where the hermaphrodite is a larvae (3days)  ### 2 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
+H_larval_time = profile[0]# Time period where the hermaphrodite is a larvae (5days)  ### 4 * day_time_points for setting the larval time of hermaphrodites equal to the one of females
 H_adult_time = profile[1] # Time period where the hermaphrodite is reproducing (5days and 8h) ## for herm living longer: 5*day_time_points+1 + (2*day_time_points)
 lifespanH = H_larval_time + H_adult_time # Total lifespan of a hermaphrodite (from egg to end of reproduction)
 
 time_before_dauer = profile[2] # Time of egg + L1 + L2 (2 days) ## 1 * day_time_points + 1 for setting the larval time of hermaphrodites equal to the one of females
-time_of_L4 = 1
+time_of_L4 = 2
 time_after_dauer = time_of_L4 + H_adult_time
 
 # Female settings # same setting as hermaphrodite that doesn't pass through dauer
 # ---------------
 
-F_larval_time = 2 * day_time_points + 1 # Time period where the female is a larvae (2days and 8h)
+F_larval_time = 4 * day_time_points # Time period where the female is a larvae (4days)
 F_adult_time = 5*day_time_points+1 # Time period where the hermaphrodite is reproducing (5 days and 8 hours (=1 time point))
 lifespanF = F_larval_time + F_adult_time # Total lifespan of a hermaphrodite (from egg to end of reproduction)
 
 # Male settings
 # -------------
 
-M_larval_time = 2 * day_time_points+1 # Time period where the male is a larvae (2days and 8h)
-M_adult_time = 5*day_time_points +1 # Time period where the male is reproducing (5 days and 8 hours (=1 time point))
+M_larval_time = 4 * day_time_points # Time period where the male is a larvae (4days)
+M_adult_time = 5*day_time_points+1 # Time period where the male is reproducing (5 days and 8 hours (=1 time point))
 lifespanM = M_larval_time + M_adult_time # Total lifespan of a male (from egg to end of reproduction)
 
 
@@ -165,12 +165,11 @@ lifespanM = M_larval_time + M_adult_time # Total lifespan of a male (from egg to
 
 N_fem = [0]*lifespanF # Number of females at every unit of time (index of the list) of their life. At the begining of the simulation there are no females.
 N_mal = [0]*lifespanM # Number of males at every unit of time. At the begining of the simulation there are no males.
-N_her = [0]*time_before_dauer + [1] + [0] + [0]*time_after_dauer # Number of hermaphrodites at every unit of time. The simulation begins with one dauer larvae (hermaphrodite-fated).The [0] and [1] represent the dauer larvae time (16h).
+N_her = [0]*time_before_dauer + [1] + [0] + [0] + [0]*time_after_dauer # Number of hermaphrodites at every unit of time. The simulation begins with one dauer larvae (hermaphrodite-fated).The [0] and [1] represent the dauer larvae time (16h).
 
 # Assert: Testing if the hermaphrodite lifespan in the same in the lists "lifespanH" (initial settings) and "N_her" (initial population)
 
-if len(N_her) != lifespanH: print("Length of hermaphrodite list N_her different from hermaphrodite lifespan")
-
+if len(N_her) != lifespanH: print(len(N_her), lifespanH, "Length of hermaphrodite list N_her different from hermaphrodite lifespan")
 
 # Number of offspring of each gender produced at each time point by females and hermaphrodites
 # --------------------------------------------------------------------------------------------
@@ -257,7 +256,7 @@ while current_iteration < N_iterations:
 
     Total_fem = sum(N_fem)
     Total_her = sum(N_her)
-    Total_mal =sum(N_mal)
+    Total_mal = sum(N_mal)
     
     result = [Total_mal,Total_fem,Total_her]
     total = sum(result)  
@@ -270,7 +269,16 @@ while current_iteration < N_iterations:
     
     result_L1 = [L1_mal,L1_fem,L1_her]
     total_L1 = sum(result_L1)   
+
+# Total number of Larvae individuals of each gender
+
+    Larvae_fem = sum(N_fem[0:F_larval_time+1])
+    Larvae_her = sum(N_her[0:H_larval_time+1])
+    Larvae_mal = sum(N_mal[0:M_larval_time+1])
     
+    result_Larvae = [Larvae_mal,Larvae_fem,Larvae_her]
+    total_Larvae = sum(result_Larvae) 
+
 # Total number of dauers
 
     dauers = sum(N_her[time_before_dauer:time_before_dauer + 2])
